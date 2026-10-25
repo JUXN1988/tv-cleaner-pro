@@ -8,7 +8,7 @@ que no se descomprime ni lleva un intérprete escondido, así que los antivirus 
 
 - **`EJECUTAR_DESDE_CODIGO.bat`**: compila lo que haya en `src\` y abre el programa al instante (queda en `bin\`).
   Si hay un error de compilación, muestra archivo y línea, y conserva la versión anterior.
-- El `.exe` ya compilado está en la sección **Releases** del repositorio (no se guarda dentro del código).
+- El `.exe` ya compilado está en la carpeta `descargas/` del repositorio.
 
 ## Compilar (sin instalar nada)
 

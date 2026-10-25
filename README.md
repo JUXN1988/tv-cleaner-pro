@@ -7,7 +7,7 @@ Gratis, de código abierto (GPL-3.0) y para Windows. Es un solo archivo `.exe`, 
 [![Licencia GPL-3.0](https://img.shields.io/badge/licencia-GPL--3.0-4DA3FF)](LICENSE)
 [![Windows 10/11](https://img.shields.io/badge/Windows-10%20%2F%2011-0078D6)](#requisitos)
 
-- **[Descargar TV_Cleaner_Pro.exe](https://github.com/JUXN1988/tv-cleaner-pro/releases/latest/download/TV_Cleaner_Pro.exe)**
+- **[Descargar TV_Cleaner_Pro.exe](https://github.com/JUXN1988/tv-cleaner-pro/raw/main/descargas/TV_Cleaner_Pro.exe)**
 - **[Página del proyecto](https://juxn1988.github.io/tv-cleaner-pro/)**
 - **[Código fuente](codigo_fuente/LEEME.md)**
 
