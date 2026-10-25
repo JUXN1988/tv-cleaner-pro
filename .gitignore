@@ -1,0 +1,18 @@
+# Salidas de compilación (el .exe se publica en Releases, no en el código)
+/TV_Cleaner_Pro.exe
+/TV_Cleaner_Pro_anterior.exe
+/codigo_fuente/bin/
+/codigo_fuente/obj/
+/codigo_fuente/pruebas/bin/
+/codigo_fuente/pruebas/capturas/
+
+# Datos de ejecución y registros (pueden contener IPs o datos del TV)
+registros/
+historial/
+respaldos_apk/
+*.log
+config.json
+
+# Windows
+Thumbs.db
+desktop.ini

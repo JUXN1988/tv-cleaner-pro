@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TV Cleaner Pro: limpia y optimiza tu TV Android</title>
+<meta name="description" content="Limpia, optimiza y administra Android TV, Google TV, Fire TV, NVIDIA Shield y TV Box por WiFi, cable o USB. Gratis, código abierto, para Windows.">
+<style>
+  :root {
+    --fondo: #0b1016;
+    --panel: #121a23;
+    --tarjeta: #17212c;
+    --borde: #22303f;
+    --texto: #e7eef6;
+    --tenue: #8fa1b5;
+    --acento: #4da3ff;
+    --acento-2: #2f7fe0;
+    --ok: #3ddc97;
+    --aviso: #f5b942;
+    --malo: #ff6b6b;
+    --radio: 16px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--fondo);
+    color: var(--texto);
+    font: 16px/1.6 "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--acento); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  img { max-width: 100%; display: block; }
+  .contenedor { width: min(1120px, 100% - 40px); margin-inline: auto; }
+
+  /* ---------- Cabecera ---------- */
+  header.nav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(11, 16, 22, .82);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--borde);
+  }
+  .nav .contenedor { display: flex; align-items: center; justify-content: space-between; height: 62px; gap: 16px; }
+  .marca { font-weight: 700; color: var(--texto); letter-spacing: .2px; display: flex; align-items: center; gap: 10px; }
+  .marca:hover { text-decoration: none; }
+  .marca .punto { width: 10px; height: 10px; border-radius: 50%; background: var(--acento); box-shadow: 0 0 14px var(--acento); }
+  .nav nav { display: flex; gap: 22px; font-size: 15px; }
+  .nav nav a { color: var(--tenue); }
+  .nav nav a:hover { color: var(--texto); text-decoration: none; }
+
+  /* ---------- Portada ---------- */
+  .portada { position: relative; overflow: hidden; padding: 84px 0 64px; }
+  .portada::before {
+    content: ""; position: absolute; inset: -20% -10% auto; height: 620px; z-index: -1;
+    background:
+      radial-gradient(closest-side at 30% 40%, rgba(77,163,255,.28), transparent 70%),
+      radial-gradient(closest-side at 75% 20%, rgba(61,220,151,.14), transparent 70%);
+  }
+  .etiqueta {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px; border: 1px solid var(--borde); border-radius: 999px;
+    color: var(--tenue); font-size: 14px; background: var(--panel);
+  }
+  .portada h1 {
+    margin: 22px 0 18px; font-size: clamp(38px, 6vw, 64px); line-height: 1.05; letter-spacing: -1px;
+    text-wrap: balance;
+  }
+  .portada h1 span { background: linear-gradient(90deg, var(--acento), var(--ok)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .portada p.lead { margin: 0; max-width: 60ch; font-size: clamp(17px, 2vw, 20px); color: var(--tenue); }
+  .botones { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 24px; border-radius: 12px; font-weight: 600; font-size: 16px;
+    border: 1px solid transparent; transition: transform .15s ease, background .15s ease;
+  }
+  .btn:hover { text-decoration: none; transform: translateY(-1px); }
+  .btn-principal { background: var(--acento); color: #04101d; box-shadow: 0 10px 30px rgba(77,163,255,.35); }
+  .btn-principal:hover { background: #6bb4ff; }
+  .btn-secundario { background: var(--panel); color: var(--texto); border-color: var(--borde); }
+  .btn-secundario:hover { border-color: var(--acento); }
+  .datos { display: flex; flex-wrap: wrap; gap: 28px; margin-top: 40px; color: var(--tenue); font-size: 14px; }
+  .datos strong { display: block; color: var(--texto); font-size: 20px; }
+
+  /* ---------- Secciones ---------- */
+  section { padding: 72px 0; }
+  section + section { border-top: 1px solid var(--borde); }
+  .titulo-seccion { font-size: clamp(28px, 4vw, 38px); margin: 0 0 10px; letter-spacing: -.5px; text-wrap: balance; }
+  .subtitulo { margin: 0 0 40px; color: var(--tenue); max-width: 64ch; }
+  .rejilla { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .tarjeta {
+    background: var(--panel); border: 1px solid var(--borde); border-radius: var(--radio);
+    padding: 24px; transition: border-color .2s ease, transform .2s ease;
+  }
+  .tarjeta:hover { border-color: #2f4a66; transform: translateY(-2px); }
+  .icono {
+    width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center;
+    background: rgba(77,163,255,.12); color: var(--acento); font-size: 20px; margin-bottom: 16px;
+  }
+  .tarjeta h3 { margin: 0 0 8px; font-size: 18px; }
+  .tarjeta p { margin: 0; color: var(--tenue); font-size: 15px; }
+
+  /* ---------- Pasos ---------- */
+  .pasos { counter-reset: paso; display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); list-style: none; padding: 0; margin: 0; }
+  .pasos li {
+    counter-increment: paso; position: relative; background: var(--panel);
+    border: 1px solid var(--borde); border-radius: var(--radio); padding: 26px 24px 24px;
+  }
+  .pasos li::before {
+    content: counter(paso); display: inline-grid; place-items: center; width: 34px; height: 34px;
+    border-radius: 50%; background: var(--acento); color: #04101d; font-weight: 700; margin-bottom: 14px;
+  }
+  .pasos h3 { margin: 0 0 6px; font-size: 17px; }
+  .pasos p { margin: 0; color: var(--tenue); font-size: 15px; }
+
+  /* ---------- Seguridad ---------- */
+  .seguridad { display: grid; gap: 18px; grid-template-columns: 1fr 1fr; }
+  @media (max-width: 760px) { .seguridad { grid-template-columns: 1fr; } }
+  .seguro { display: flex; gap: 16px; background: var(--panel); border: 1px solid var(--borde); border-radius: var(--radio); padding: 22px; }
+  .seguro .check {
+    flex: 0 0 auto; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center;
+    background: rgba(61,220,151,.14); color: var(--ok); font-weight: 700;
+  }
+  .seguro h3 { margin: 0 0 4px; font-size: 16px; }
+  .seguro p { margin: 0; color: var(--tenue); font-size: 15px; }
+  .seguro code { font-size: 13px; color: #b9d8ff; background: #0d1620; padding: 1px 6px; border-radius: 6px; }
+
+  .aviso {
+    margin-top: 24px; border-left: 4px solid var(--aviso); background: rgba(245,185,66,.08);
+    border-radius: 12px; padding: 16px 20px; color: #f1e2bf; font-size: 15px;
+  }
+
+  /* ---------- Capturas ---------- */
+  .galeria { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  figure { margin: 0; background: var(--panel); border: 1px solid var(--borde); border-radius: var(--radio); overflow: hidden; }
+  figure img { width: 100%; height: auto; }
+  figcaption { padding: 12px 16px; color: var(--tenue); font-size: 14px; border-top: 1px solid var(--borde); }
+
+  /* ---------- Descarga ---------- */
+  .descarga {
+    background: linear-gradient(135deg, #14283d, #0f1b28 60%);
+    border: 1px solid #23415f; border-radius: 22px; padding: 44px; text-align: center;
+  }
+  .descarga h2 { margin: 0 0 10px; font-size: clamp(26px, 4vw, 34px); }
+  .descarga p { margin: 0 auto 28px; color: var(--tenue); max-width: 56ch; }
+  .hash {
+    margin: 26px auto 0; max-width: 100%; overflow-x: auto; font: 13px/1.5 Consolas, "Courier New", monospace;
+    background: #0a1119; border: 1px solid var(--borde); border-radius: 10px; padding: 12px 16px; color: #b9d8ff;
+  }
+  .hash small { display: block; color: var(--tenue); font: 13px "Segoe UI", system-ui, sans-serif; margin-bottom: 4px; }
+
+  /* ---------- Pie ---------- */
+  footer { border-top: 1px solid var(--borde); padding: 36px 0 48px; color: var(--tenue); font-size: 14px; }
+  footer .contenedor { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; }
+  footer nav { display: flex; gap: 20px; flex-wrap: wrap; }
+
+  /* ---------- Teléfono ---------- */
+  @media (max-width: 720px) {
+    .nav nav a:not(.solo-pc) { display: none; }
+    .nav nav { gap: 14px; }
+    .portada { padding: 56px 0 44px; }
+    section { padding: 52px 0; }
+    .descarga { padding: 28px 22px; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .tarjeta, .btn { transition: none; } }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="contenedor">
+    <a class="marca" href="#inicio"><span class="punto"></span>TV Cleaner Pro</a>
+    <nav>
+      <a href="#funciones">Funciones</a>
+      <a href="#seguridad" class="solo-pc">Seguridad</a>
+      <a href="#como">Cómo usarlo</a>
+      <a href="#descargar">Descargar</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+
+  <div class="portada">
+    <div class="contenedor">
+      <span class="etiqueta">Gratis · Código abierto · Windows 10 / 11</span>
+      <h1>Tu TV Android, <span>limpio, rápido y bajo tu control</span></h1>
+      <p class="lead">Quita publicidad, telemetría y apps que no usas, instala tus propias aplicaciones y optimiza
+        Android TV, Google TV, Fire TV, NVIDIA Shield y cajas TV Box, por WiFi, cable o USB. Todo se puede deshacer.</p>
+      <div class="botones">
+        <a class="btn btn-principal" href="https://github.com/JUXN1988/tv-cleaner-pro/releases/latest/download/TV_Cleaner_Pro.exe">
+          ⬇ Descargar para Windows
+        </a>
+        <a class="btn btn-secundario" href="https://github.com/JUXN1988/tv-cleaner-pro">Ver código en GitHub</a>
+      </div>
+      <div class="datos">
+        <div><strong>1 archivo</strong>sin instalación</div>
+        <div><strong>100 % reversible</strong>cada cambio se puede deshacer</div>
+        <div><strong>GPL-3.0</strong>código libre para todos</div>
+      </div>
+    </div>
+  </div>
+
+  <section id="funciones">
+    <div class="contenedor">
+      <h2 class="titulo-seccion">Todo lo que hace</h2>
+      <p class="subtitulo">Una sola ventana para limpiar el TV, instalar apps y revisar lo que pasa dentro.</p>
+      <div class="rejilla">
+        <article class="tarjeta"><div class="icono">🛡</div><h3>Quita telemetría y publicidad</h3><p>Detecta el rastreo, los reportes de uso y las apps que muestran anuncios, y te deja elegir qué quitar.</p></article>
+        <article class="tarjeta"><div class="icono">🧹</div><h3>Desactiva o elimina apps</h3><p>Apps preinstaladas fuera de tu uso. Desactivar es lo más seguro y se revierte con un clic.</p></article>
+        <article class="tarjeta"><div class="icono">📦</div><h3>Instala tus apps</h3><p>APK, APK divididos, <code>.apks</code>, <code>.xapk</code> y <code>.apkm</code>, con datos OBB. Los errores se explican en español.</p></article>
+        <article class="tarjeta"><div class="icono">📡</div><h3>Encuentra tu TV en la red</h3><p>Escanea toda la red local e identifica televisores de muchas marcas, incluidos Android TV, Google TV y Fire TV.</p></article>
+        <article class="tarjeta"><div class="icono">⚡</div><h3>Optimiza</h3><p>Animaciones más rápidas, limpieza de caché, optimización de apps y apagado de escaneos WiFi y Bluetooth en segundo plano.</p></article>
+        <article class="tarjeta"><div class="icono">🏠</div><h3>Cambia el launcher</h3><p>Elige la pantalla de inicio que prefieras. El programa verifica que el cambio funcione antes de darlo por bueno.</p></article>
+        <article class="tarjeta"><div class="icono">🎮</div><h3>Control remoto desde la PC</h3><p>Usa las flechas, OK, volver, inicio y escribe texto desde el teclado de tu computadora.</p></article>
+        <article class="tarjeta"><div class="icono">🔍</div><h3>Diagnóstico</h3><p>Lee el logcat de una app, toma capturas, extrae su APK e identifica el modelo y la versión del TV.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="seguridad">
+    <div class="contenedor">
+      <h2 class="titulo-seccion">Seguridad primero</h2>
+      <p class="subtitulo">Pensado para no dañar el sistema del TV. Cada cambio queda registrado y se puede revertir.</p>
+      <div class="seguridad">
+        <div class="seguro"><div class="check">✓</div><div><h3>Solo desactiva por defecto</h3><p>Una app desactivada deja de ejecutarse y no se borra. Se reactiva con <code>pm enable</code>.</p></div></div>
+        <div class="seguro"><div class="check">✓</div><div><h3>Eliminar sin tocar el sistema</h3><p>Se quita solo para tu usuario con <code>uninstall -k --user 0</code> y vuelve con <code>install-existing</code>.</p></div></div>
+        <div class="seguro"><div class="check">✓</div><div><h3>Respaldo antes de desinstalar</h3><p>Las apps que instalaste guardan su APK en la PC antes de desinstalarse.</p></div></div>
+        <div class="seguro"><div class="check">✓</div><div><h3>Protecciones automáticas</h3><p>El launcher, el teclado y los servicios de accesibilidad activos nunca se tocan. En Fire TV, tampoco la Appstore.</p></div></div>
+        <div class="seguro"><div class="check">✓</div><div><h3>Verificación después de cada cambio</h3><p>Si el TV deja de responder o pierde la pantalla de inicio, el programa reactiva los launchers.</p></div></div>
+        <div class="seguro"><div class="check">✓</div><div><h3>Restauración de emergencia</h3><p>Cada TV tiene su historial y un archivo <code>_RESTAURAR.bat</code> para deshacer todo sin abrir el programa.</p></div></div>
+      </div>
+      <div class="aviso"><strong>Úsalo bajo tu responsabilidad.</strong> Empieza por desactivar antes de eliminar y cambia pocas cosas a la vez.
+        Las pruebas automatizadas se hicieron con un TV simulado. Este programa no es oficial de Google, Amazon, NVIDIA ni de ningún fabricante de TV.</div>
+    </div>
+  </section>
+
+  <section id="como">
+    <div class="contenedor">
+      <h2 class="titulo-seccion">Cómo usarlo en cuatro pasos</h2>
+      <p class="subtitulo">No necesitas saber programar. Solo activar la depuración en el TV y tener ambos equipos en la misma red.</p>
+      <ol class="pasos">
+        <li><h3>Activa la depuración</h3><p>Toca 7 veces el número de compilación en <em>Acerca de</em> y activa la <strong>Depuración ADB</strong>.</p></li>
+        <li><h3>Abre el programa</h3><p>Escribe la IP del TV o pulsa <strong>Buscar en la red</strong> y elige tu equipo.</p></li>
+        <li><h3>Conecta</h3><p>Pulsa <strong>Conectar</strong> y acepta el aviso de depuración que aparece en el TV.</p></li>
+        <li><h3>Limpia</h3><p>Marca lo que quieras quitar y pulsa <strong>Aplicar</strong>. Todo queda en el historial.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="capturas">
+    <div class="contenedor">
+      <h2 class="titulo-seccion">Así se ve</h2>
+      <p class="subtitulo">Una interfaz oscura, con pestañas claras y mensajes en español.</p>
+      <div class="galeria">
+        <figure><img src="capturas/02_limpieza.png" alt="Pestaña Limpieza con la lista de apps y su nivel de seguridad" loading="lazy"><figcaption>Limpieza: decide qué quitar, con el nivel de seguridad de cada app.</figcaption></figure>
+        <figure><img src="capturas/04_red.png" alt="Escáner de red con los televisores encontrados" loading="lazy"><figcaption>Red: encuentra televisores en toda la red local.</figcaption></figure>
+        <figure><img src="capturas/05_optimizar.png" alt="Pestaña Optimizar con tarjetas de ajustes" loading="lazy"><figcaption>Optimizar: animaciones, caché y ajustes de fondo.</figcaption></figure>
+        <figure><img src="capturas/08_respaldos.png" alt="Pestaña Respaldos con el historial de cambios" loading="lazy"><figcaption>Respaldos: deshaz cualquier cambio con un clic.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="descargar">
+    <div class="contenedor">
+      <div class="descarga">
+        <h2>Descárgalo gratis</h2>
+        <p>Un solo archivo para Windows 10 y 11. No necesitas instalar nada más.</p>
+        <a class="btn btn-principal" href="https://github.com/JUXN1988/tv-cleaner-pro/releases/latest/download/TV_Cleaner_Pro.exe">⬇ Descargar TV_Cleaner_Pro.exe</a>
+        <div class="hash"><small>Verifica la descarga (SHA-256 de la versión 3.0.0):</small>af679ff22f89464a44d9de02317aedf52e99d56f9f185219065cda0fcc2558fd</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="contenedor">
+    <div>TV Cleaner Pro · Licencia GPL-3.0 · Creado por Gabriel</div>
+    <nav>
+      <a href="https://github.com/JUXN1988/tv-cleaner-pro">Código</a>
+      <a href="https://github.com/JUXN1988/tv-cleaner-pro/issues">Reportar un problema</a>
+      <a href="https://github.com/JUXN1988/tv-cleaner-pro/blob/main/THIRD_PARTY_NOTICES.md">Créditos</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
