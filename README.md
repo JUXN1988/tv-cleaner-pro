@@ -1,5 +1,7 @@
 # TV Cleaner Pro
 
+![TV Cleaner Pro · versión de prueba](docs/promo.png)
+
 **Limpia, optimiza y administra tu TV Android**: Android TV, Google TV, Fire TV, NVIDIA Shield y cajas TV Box, por WiFi, cable de red o USB.
 
 Gratis, de código abierto (GPL-3.0) y para Windows. Es un solo archivo `.exe`, sin instalación.
@@ -10,6 +12,9 @@ Gratis, de código abierto (GPL-3.0) y para Windows. Es un solo archivo `.exe`, 
 - **[Descargar TV_Cleaner_Pro.exe](https://github.com/JUXN1988/tv-cleaner-pro/raw/main/descargas/TV_Cleaner_Pro.exe)**
 - **[Página del proyecto](https://juxn1988.github.io/tv-cleaner-pro/)**
 - **[Código fuente](codigo_fuente/LEEME.md)**
+
+> 🧪 **Versión de prueba.** TV Cleaner Pro funciona, pero lo sigo mejorando y quiero hacerlo con tu ayuda.
+> Si lo probaste, cuéntame qué TV usaste y cómo te fue: [reporta un error](https://github.com/JUXN1988/tv-cleaner-pro/issues/new?template=bug_report.yml) o [sugiere una mejora](https://github.com/JUXN1988/tv-cleaner-pro/issues/new?template=feature_request.yml). Leo todas las sugerencias.
 
 ---
 
@@ -84,6 +89,11 @@ Todo está en [`codigo_fuente/`](codigo_fuente/). Solo necesitas Windows:
 - `EJECUTAR_PRUEBAS.bat`: ejecuta las pruebas contra un TV simulado (necesita Python).
 
 La guía completa, con cómo agregar un paquete nuevo o actualizar la lista de apps, está en [`codigo_fuente/LEEME.md`](codigo_fuente/LEEME.md).
+
+## Próximas mejoras: tú decides
+
+Esta es una versión de prueba. Las próximas mejoras saldrán de lo que reporten quienes lo usen:
+mira los [issues abiertos](https://github.com/JUXN1988/tv-cleaner-pro/issues), comenta los que te interesen o abre uno nuevo.
 
 ## Contribuir
 

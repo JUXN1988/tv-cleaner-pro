@@ -1,0 +1,18 @@
+name: Sugerir una mejora / Suggest an improvement
+description: Ideas para mejorar TV Cleaner Pro / Ideas to improve TV Cleaner Pro
+labels: [enhancement]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: ¿Qué te gustaría? / What would you like?
+    validations:
+      required: true
+  - type: textarea
+    id: para_que
+    attributes:
+      label: ¿Para qué te sirve? / Why is it useful?
+  - type: input
+    id: tv
+    attributes:
+      label: ¿Con qué TV lo usas? / Which TV do you use?

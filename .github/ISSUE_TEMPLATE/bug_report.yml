@@ -1,0 +1,38 @@
+name: Reportar un error / Bug report
+description: Algo no funcionó en tu TV / Something didn't work on your TV
+labels: [bug]
+body:
+  - type: textarea
+    id: que
+    attributes:
+      label: ¿Qué pasó? / What happened?
+      description: Pasos para repetirlo y qué esperabas / Steps to reproduce and what you expected
+    validations:
+      required: true
+  - type: input
+    id: tv
+    attributes:
+      label: Marca y modelo del TV / TV brand and model
+      placeholder: "Ej.: Xiaomi Mi Box S, TCL 55P725, Fire TV Stick 4K"
+    validations:
+      required: true
+  - type: input
+    id: android
+    attributes:
+      label: Versión de Android del TV / TV Android version
+      placeholder: "Ej.: Android TV 11"
+  - type: dropdown
+    id: conexion
+    attributes:
+      label: Conexión / Connection
+      options: [WiFi, Cable de red / Ethernet, USB]
+  - type: input
+    id: version
+    attributes:
+      label: Versión de TV Cleaner Pro / Version
+      placeholder: "3.0.0"
+  - type: textarea
+    id: registro
+    attributes:
+      label: Texto del error o captura / Error text or screenshot
+      description: Revisa que no tenga tu IP ni datos personales / Remove your IP and personal data
